@@ -6,10 +6,10 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 /** messages service*/
 
 /* Database connection start */
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "final";
+$servername = "35.166.18.143";
+$username = "brian.martey";
+$password = "73f10fb2216b97f4";
+$dbname = "db__brian_martey";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
@@ -43,7 +43,7 @@ $query=mysqli_query($conn, $sql) or die("messagesdata.php: get bookings");
 $totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result. 
 $sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]." ".$requestData['order'][0]['dir']." LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 /* $requestData['order'][0]['column'] contains column index, $requestData['order'][0]['dir'] contains order such as asc/desc  */	
-$query=mysqli_query($conn, $sql) or die("messagesdata.php: get bookings");
+$query=mysqli_query($conn, $sql) or die("messagesdata.php: get bookings3");
 
 $data = array();
 while( $row=mysqli_fetch_array($query) ) {  // preparing an array
@@ -51,10 +51,10 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 
 	$date = $row['date_sent'];
 	$newdate = date('j F Y',strtotime($date));
+	$nestedData[] = $newdate;
 	$nestedData[] = $row['sender'];
 	$nestedData[] = $row['title'];
 	$nestedData[] = $row['content'];
-	$nestedData[] = $newdate;
 
 	$data[] = $nestedData;
 }

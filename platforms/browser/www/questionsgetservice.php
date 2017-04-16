@@ -7,17 +7,25 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 $requestNumber = $_REQUEST['number'];  //storing (get/post) request to a variable
 
 $data = array();
+$newdata = array();
 
 $questions = new questions(); //object of questions class
-if (!empty($requestNumber)) {  
-	$questionslist = $questions->getquestionstoanswer($requestNumber);  //query with search condition
-}else{
-	$questionslist = $questions->getquestions();    //query without search condition
-}
-while($row = $questions->fetch()){
-	$data[] = $row;
-}
-$json_data = $data;
+if (!empty($requestNumber)) {
+	$numbers = json_decode($requestNumber);
 
-echo json_encode($json_data); //send data as json format
+	for ($i=0; $i < count($numbers); $i++) { 
+		$questionslist = $questions->getquestionstoanswer($numbers[$i]);  //query with search condition
+
+		while($row = $questions->fetch()){
+			$data['qcontent'] = $row['qcontent'];
+			$data['qid'] = $row['qid'];
+			$data['answer'] = $row['answer'];
+			$newdata[] = $data;
+		}
+	}
+	
+	$json_data = $newdata;
+
+	echo json_encode($json_data); //send data as json format
+}
 ?>

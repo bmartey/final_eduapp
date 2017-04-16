@@ -45,7 +45,7 @@ class questions extends adb{
 	*/
 
 	function getquestionstoanswer($qno){
-			$strQuery="select qcontent from questions where qid = '$qno'";
+			$strQuery="select qid, qcontent, answer from questions where qid = '$qno'";
 			$result = $this->query($strQuery);
 	}
 

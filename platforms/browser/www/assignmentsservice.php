@@ -44,7 +44,7 @@ if (!empty($requestNewQuestion)) {  //creating and sending newly created questio
 	}
 
     $serializedQuestions = serialize($data);
-    $assignmentslist = $assignments->addassignment($title,$topic_area,$grade,$description,$serializedQuestions,$tid,$schid);
+    $assignmentslist = $assignments->addassignment($title,$topic_area,$grade,$description,$serializedQuestions,$tid,$schid,$date);
     echo "success";
 
 }else if(!empty($requestOldQuestion)){//sending questions as assignments
@@ -56,11 +56,13 @@ if (!empty($requestNewQuestion)) {  //creating and sending newly created questio
 	$tid = $_REQUEST['tid'];
 	$schid = $_REQUEST['schid'];
     $description = $requestOldQuestion;
+    date_default_timezone_set("Europe/London");
+    $date = date("Y-m-d h:i:s");
 
     $questionss = json_decode($qs, true);
     $serializedQuestions = serialize($questionss);
 
-    $assignmentslist = $assignments->addassignment($title,$topic_area,$grade,$description,$serializedQuestions,$tid,$schid);
+    $assignmentslist = $assignments->addassignment($title,$topic_area,$grade,$description,$serializedQuestions,$tid,$schid,$date);
     echo "success";
 
 }else{

@@ -26,6 +26,21 @@ class classes extends adb{
 	}
 
 	/**
+	*get class count
+	*returns a boolean true if successful, else, false
+	*/
+
+	function getclassno(){
+		$strQuery="select count(cno) from class";
+		$result = $this->query($strQuery);
+		if ($result){
+			return $result;
+		}else{
+			return $result;
+		}
+	}
+
+	/**
 	*get class
 	*@param string info  
 	*returns a boolean true if successful, else, false
@@ -45,8 +60,23 @@ class classes extends adb{
 	*/
 
 	function addclass($cno,$cname){
-			$strQuery="insert into class set cno='$cno',cname='$cname'";
-			$result = $this->query($strQuery);
+		$strQuery="insert into class set cno='$cno',cname='$cname'";
+		$result = $this->query($strQuery);
+	}
+
+	function getteachersclass($uid){
+		$strQuery="select grade from users where UID ='$uid' and LEVEL =3";
+		$result = $this->query($strQuery);
+	}
+
+	function getclassesno($grade,$schoolid){
+		$strQuery="select count(grade) from users where LEVEL= 2 and grade ='$grade' and SCHOOLID ='$schoolid'";
+		$result = $this->query($strQuery);
+	}
+
+	function getclassname($cno){
+		$strQuery="select cname from class where cno ='$cno'";
+		$result = $this->query($strQuery);
 	}
 			
 }

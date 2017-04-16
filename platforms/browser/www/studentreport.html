@@ -7,80 +7,139 @@
     <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
-    <link href="css/font-awesome-1.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
     <link href="css/foundation-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
     <link rel="stylesheet" type="text/css" href="css/student.css">
-    <script src="js/vendor/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.foundation.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTable.style.css">
+
+    <script src="js/jquery.js"></script>
     <script src='lib/moment.min.js'></script>
     <script src="dist/sweetalert.min.js"></script> 
+    <script type="text/javascript" language="javascript" src="js/jquery.js"></script> 
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.foundation.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.scroller.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsive.foundation.min.js"></script>
 
   </head>
   <body>
-    <div class="callout primary medium head">
-      <div class="columns small-12 medium-12 large-12">
-        <div class="columns small-6 medium-6 large-6">
-          <div class="row column text-left">
+
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+        <!-- off-canvas title bar for 'small' screen -->
+        <div class="title-bar callout primary medium head" data-responsive-toggle="widemenu" data-hide-for="medium">
+          <div class="title-bar-left">
             <ul class="menu">
-              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
-              <li><a href="#"><i class="icons fi-list-bullet"></i></a></li>
+              <li><a href="#"><i class="icons fi-list" type="button" data-open="offCanvasLeft"></i></a></li>
             </ul>
           </div>
-        </div>
-        <div class="columns small-6 medium-6 large-6">
-          <div class="row column text-right">
-            <a><img class="circularimage" src="" alt="profile.jpg" id ="profilephoto"></a>
+          <div class="title-bar-right">
+            <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
           </div>
         </div>
-    </div>
-    </div>
-    <div class="panel secondary callout medium body">
-      <div id="dataform" action="" method="POST" enctype="multipart/form-data">
-        <ul class="tabs" data-tabs id="tabs">
-          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Donut</a></li>
-          <li class="tabs-title"><a href="#panel2">Bar</a></li>
-          <li class="tabs-title"><a href="#panel3">Time Data</a></li>
-          <li class="tabs-title"><a href="#panel4">Series</a></li>
-        </ul>
-        <div class="tabs-content" data-tabs-content="tabs">
-          <div class="tabs-panel is-active" id="panel1">
-            <div id="container1" style="min-width: 85%; height: 90%; max-width: 120%; margin: 0 auto "></div>
-          </div>
-          <div class="tabs-panel" id="panel2">
-            <div id="container2" style="min-width: 83%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
-          </div>
-          <div class="tabs-panel" id="panel3">
-            <div id="container3" style="min-width: 85%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
-          </div>
-          <div class="tabs-panel" id="panel4">
-            <div id="container4" style="min-width: 85%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
+
+        <!-- off-canvas left menu -->
+        <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+
+            <!-- Close button -->
+            <button class="close-button" aria-label="Close menu" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+          <ul class="vertical dropdown menu" data-dropdown-menu>
+            <li><a class="text-center"><img class="bigcircularimage" src="" alt="profile.jpg" id ="profilephoto1"></a></li>
+            <li><br></li>
+            <li><a class="hollowbutton button" href="studentpage.html"><i class="icons fi-arrow-left"></i><span>Back</span></a></li>
+            <li><a class="hollowbutton button" href="studentassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+            <li><a class="hollowbutton button" href="studentnews.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+            <li><a class="hollowbutton button" href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+            <li><br></br></li>
+            <li><br></br></li>
+            <li class="text-center"><button id="logout1" class="hollowbutton button" href="#">Sign Out</button></li>
+          </ul>
+        </div>
+
+        <!-- "wider" top-bar menu for 'medium' and up -->
+        <div id="widemenu" class="widemenu callout primary medium head">
+          <div class="row columns small-12 medium-12 large-12">
+            <div class="columns small-4 medium-4 large-4">
+            <ul class="menu align-left">
+              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li>
+                <ul class="dropdown menu" data-dropdown-menu>
+                  <li>
+                    <a href="#"><i class="icons fi-list"></i></a>
+                    <ul class="menu">
+                      <li><a href="studentassignments.html"><i class="icons fi-clipboard-pencil"></i><span>Assignments</span></a></li>
+                      <li><a href="studentnews.html"><i class="icons fi-comments"></i><span>Messages</span></a></li>
+                      <li><a href="studentpast.html"><i class="icons fi-list-bullet"></i><span>History</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">
+              <ul class="menu-centered">
+                <a><img class="circularimage float-center" src="" alt="profile.jpg" id ="profilephoto2" ></a>
+              </ul>
+            </div>
+            <div class="columns small-4 medium-4 large-4">  
+            <ul class="menu align-right">
+              <li><button id="logout2" class="hollowbutton hollow button" href="#">Sign Out</button></li>
+            </ul>
+            </div>
           </div>
         </div>
+
+        <!-- original content goes in this container -->
+        <div class="off-canvas-content" data-off-canvas-content>
+          <div class="widebody">  
+            <div class="innerwidebody">
+              <div class="callout">
+                <div id="dataform" action="" method="POST" enctype="multipart/form-data">
+                    <ul class="tabs" data-tabs id="tabs">
+                      <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Donut Chart</a></li>
+                      <li class="tabs-title"><a href="#panel2">Bar Graph</a></li>
+                      <li class="tabs-title"><a href="#panel3">Series Graph</a></li>
+                    </ul>
+                    <div class="tabs-content" data-tabs-content="tabs">
+                      <div class="tabs-panel is-active" id="panel1">
+                        <div id="container1" style="min-width: 85%; height: 50%; max-width: 120%; margin: 0 auto "></div>
+                      </div>
+                      <div class="tabs-panel" id="panel2">
+                        <div id="container2" style="min-width: 95%; height: 50%; max-width: 100%; margin: 0 auto"></div>
+                      </div>
+                      <div class="tabs-panel" id="panel3">
+                        <div id="container3" style="min-width: 95%; height: 50%; max-width: 100%; margin: 0 auto"></div>
+                      </div>
+                    </div>
+                  </div> 
+              </div>     
+            </div>
+            <div class="hide-for-small-only">
+              <div class="text-center">
+                <a><img class="circularimage" src="eduapp.png" alt="logo.jpg" id ="applogo"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- close wrapper, no more content after this -->
       </div>
     </div>
 
-    <footer class="text-center">
-      <div class="columns small-3 medium-3 large-3">
-        <a href="studentnews.html"><i class="secondicons fi-comments"></i></a>
-        <label>News</label>
-      </div>
-      <div class="columns small-3 medium-3 large-3">
-        <a href="studentassignments.html"><i class="secondicons fi-clipboard-pencil"></i></a>
-        <label>Assignments</label>
-      </div>
-      <div class="columns small-3 medium-3 large-3"> 
-        <a href="studentpast.html"><i class="secondicons fi-list-bullet"></i></a>
-        <label>Past Work</label>
-      </div>
-      <div class="columns small-3 medium-3 large-3">
-        <a href="#"><i class="secondicons fi-graph-bar"></i></a>
-        <label>Progress</label>
-      </div>
-    </footer>
 
     <script src="js/foundation.min.js"></script>
-    <script src="js/vendor/foundation.js"></script>
+    <script src="js/foundation.js"></script>
     <script src="js/highstock.js"></script>
     <script src="js/highcharts-3d.js"></script>
     <script src="js/exporting.js"></script> 
@@ -91,432 +150,167 @@
     <script>
       $(document).foundation();
     </script>
-    <style type="text/css">
-      .tabs-content{
-        height: 90%;
-      }
-      
-    </style>
 
     <script type="text/javascript">
     $(document).ready(function() {
       var studentinfo = sessionStorage.getItem('studentdata');
       var parsedinfo = JSON.parse(studentinfo);
-      document.getElementById("profilephoto").src = parsedinfo.photo;
+      document.getElementById("profilephoto1").src = parsedinfo.photo;
+      document.getElementById("profilephoto2").src = parsedinfo.photo;
 
     });
-    </script>
 
-    <script type="text/javascript" language="javascript" >
+    var studentinfo = sessionStorage.getItem('studentdata');
+    var parsedinfo = JSON.parse(studentinfo);
+    var stid = parsedinfo.uid;
+    var name = parsedinfo.fname+" "+parsedinfo.lname;
 
-      $.fn.dataTableExt.afnFiltering.push(
-        function( oSettings, aData, iDataIndex ) {
-          var iFini = document.getElementById('datestart').value;
-          var iFfin = document.getElementById('dateend').value;
-          var iStartDateCol = 4;
-          var iEndDateCol = 4;
+    //pie chart
+    var url1 = 'gradesservice.php';
+    var pie_processed_grades = new Array();  
+    var bar_processed_grades = new Array();
+    var bar_processed_grades_name = new Array();
+    var series_processed_grades_dates = new Array();
+    var sum = '';
 
-          iFini=iFini.substring(0,4) + iFini.substring(5,7)+ iFini.substring(8,10);
-          iFfin=iFfin.substring(0,4) + iFfin.substring(5,7)+ iFfin.substring(8,10);
-   
-          var datofini=aData[iStartDateCol].substring(0,4) + aData[iStartDateCol].substring(5,7)+ aData[iStartDateCol].substring(8,10);
-          var datoffin=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10);
-   
-          if ( iFini === "" && iFfin === "" )
-          {
-              return true;
-          }
-          else if ( iFini <= datofini && iFfin === "")
-          {
-              return true;
-          }
-          else if ( iFfin >= datoffin && iFini === "")
-          {
-              return true;
-          }
-          else if (iFini <= datofini && iFfin >= datoffin)
-          {
-              return true;
-          }
-          return false;
+    $.getJSON(url1+"?chart=pie&stid="+stid, function (data1) {
+
+        for (i = 0; i < data1.length; i++){
+            pie_processed_grades.push([data1[i].name, parseInt(data1[i].y)]);
         }
-      );
-
-        //$('#datestart').keyup( function() { dataTable.draw(); } );
-        $("#datestart").on("keyup search input paste cut", function() {dataTable.search(this.value).draw(); });  
-        //$('#dateend').keyup( function() { dataTable.draw(); } );
-        $("#dateend").on("keyup search input paste cut", function() {dataTable.search(this.value).draw(); });
-
-        $("div.toolbar").html('<div class="row medium-6"><div class="columns medium-3"><input type="text" class="span2" id="datestart" name="datestart" placeholder="Start Date"></div><div class="columns medium-3"><input type="text" class="span2" id="dateend" name="dateend" placeholder="End Date"></div></div>');
-
-  </script> 
-
-    <script type="text/javascript">
-
-    // Build the chart
-    Highcharts.chart('container1', {
-    chart: {
-        type: 'pie',
-        options3d: {
-            enabled: true,
-            alpha: 45
-        }
-    },
-    title: {
-        text: 'Contents of Highsoft\'s weekly fruit delivery'
-    },
-    subtitle: {
-        text: '3D donut in Highcharts'
-    },
-    plotOptions: {
-        pie: {
-            innerSize: 100,
-            depth: 45
-        }
-    },
-    series: [{
-        name: 'Delivered amount',
-        data: [
-            ['Bananas', 8],
-            ['Kiwi', 3],
-            ['Mixed nuts', 1],
-            ['Oranges', 6],
-            ['Apples', 8],
-            ['Pears', 4],
-            ['Clementines', 4],
-            ['Reddish (bag)', 1],
-            ['Grapes (bunch)', 1]
-        ]
-    }]
-});
-    </script>
-
-    <script type="text/javascript">
-      // Create the chart
-Highcharts.chart('container2', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Browser market shares. January, 2015 to May, 2015'
-    },
-    subtitle: {
-        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
-    },
-    xAxis: {
-        type: 'category'
-    },
-    yAxis: {
-        title: {
-            text: 'Total percent market share'
-        }
-
-    },
-    legend: {
-        enabled: false
-    },
-    plotOptions: {
-        series: {
-            borderWidth: 0,
-            dataLabels: {
-                enabled: true,
-                format: '{point.y:.1f}%'
-            }
-        }
-    },
-
-    tooltip: {
-        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-    },
-
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [{
-            name: 'Microsoft Internet Explorer',
-            y: 56.33,
-            drilldown: 'Microsoft Internet Explorer'
-        }, {
-            name: 'Chrome',
-            y: 24.03,
-            drilldown: 'Chrome'
-        }, {
-            name: 'Firefox',
-            y: 10.38,
-            drilldown: 'Firefox'
-        }, {
-            name: 'Safari',
-            y: 4.77,
-            drilldown: 'Safari'
-        }, {
-            name: 'Opera',
-            y: 0.91,
-            drilldown: 'Opera'
-        }, {
-            name: 'Proprietary or Undetectable',
-            y: 0.2,
-            drilldown: null
-        }]
-    }],
-    drilldown: {
-        series: [{
-            name: 'Microsoft Internet Explorer',
-            id: 'Microsoft Internet Explorer',
-            data: [
-                [
-                    'v11.0',
-                    24.13
-                ],
-                [
-                    'v8.0',
-                    17.2
-                ],
-                [
-                    'v9.0',
-                    8.11
-                ],
-                [
-                    'v10.0',
-                    5.33
-                ],
-                [
-                    'v6.0',
-                    1.06
-                ],
-                [
-                    'v7.0',
-                    0.5
-                ]
-            ]
-        }, {
-            name: 'Chrome',
-            id: 'Chrome',
-            data: [
-                [
-                    'v40.0',
-                    5
-                ],
-                [
-                    'v41.0',
-                    4.32
-                ],
-                [
-                    'v42.0',
-                    3.68
-                ],
-                [
-                    'v39.0',
-                    2.96
-                ],
-                [
-                    'v36.0',
-                    2.53
-                ],
-                [
-                    'v43.0',
-                    1.45
-                ],
-                [
-                    'v31.0',
-                    1.24
-                ],
-                [
-                    'v35.0',
-                    0.85
-                ],
-                [
-                    'v38.0',
-                    0.6
-                ],
-                [
-                    'v32.0',
-                    0.55
-                ],
-                [
-                    'v37.0',
-                    0.38
-                ],
-                [
-                    'v33.0',
-                    0.19
-                ],
-                [
-                    'v34.0',
-                    0.14
-                ],
-                [
-                    'v30.0',
-                    0.14
-                ]
-            ]
-        }, {
-            name: 'Firefox',
-            id: 'Firefox',
-            data: [
-                [
-                    'v35',
-                    2.76
-                ],
-                [
-                    'v36',
-                    2.32
-                ],
-                [
-                    'v37',
-                    2.31
-                ],
-                [
-                    'v34',
-                    1.27
-                ],
-                [
-                    'v38',
-                    1.02
-                ],
-                [
-                    'v31',
-                    0.33
-                ],
-                [
-                    'v33',
-                    0.22
-                ],
-                [
-                    'v32',
-                    0.15
-                ]
-            ]
-        }, {
-            name: 'Safari',
-            id: 'Safari',
-            data: [
-                [
-                    'v8.0',
-                    2.56
-                ],
-                [
-                    'v7.1',
-                    0.77
-                ],
-                [
-                    'v5.1',
-                    0.42
-                ],
-                [
-                    'v5.0',
-                    0.3
-                ],
-                [
-                    'v6.1',
-                    0.29
-                ],
-                [
-                    'v7.0',
-                    0.26
-                ],
-                [
-                    'v6.2',
-                    0.17
-                ]
-            ]
-        }, {
-            name: 'Opera',
-            id: 'Opera',
-            data: [
-                [
-                    'v12.x',
-                    0.34
-                ],
-                [
-                    'v28',
-                    0.24
-                ],
-                [
-                    'v27',
-                    0.17
-                ],
-                [
-                    'v29',
-                    0.16
-                ]
-            ]
-        }]
-    }
-});
-    </script>
-
-    <script type="text/javascript">
-    Highcharts.chart('container3', {
-
-    title: {
-        text: 'Solar Employment Growth by Sector, 2010-2016'
-    },
-
-    subtitle: {
-        text: 'Source: thesolarfoundation.com'
-    },
-
-    yAxis: {
-        title: {
-            text: 'Number of Employees'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        series: {
-            pointStart: 2010
-        }
-    },
-
-    series: [{
-        name: 'Installation',
-        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-    }, {
-        name: 'Manufacturing',
-        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-    }, {
-        name: 'Sales & Distribution',
-        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-    }, {
-        name: 'Project Development',
-        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-    }, {
-        name: 'Other',
-        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-    }]
-
-});
-    </script>
-
-    <script type="text/javascript">
-      $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
-    // Create the chart
-    Highcharts.stockChart('container4', {
-
-
-        rangeSelector: {
-            selected: 1
-        },
-
-        title: {
-            text: 'AAPL Stock Price'
-        },
-
-        series: [{
-            name: 'AAPL',
-            data: data,
+        
+        Highcharts.chart('container1', {
+            chart: {
+                type: 'pie',
+                options3d: {
+                    enabled: true,
+                    alpha: 45
+                }
+            },
+            title: {
+                text: name+'\'s Graphs'
+            },
             tooltip: {
-                valueDecimals: 2
-            }
-        }]
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            subtitle: {
+                text: 'Explore'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true,
+                    innerSize: 100,
+                    depth: 45
+                }
+            },
+            series: [{
+                name: 'Percentage of Grades',
+                data: pie_processed_grades
+            }]
+        });
+      });
+
+
+      // Create the chart
+    $.getJSON(url1+"?chart=bar&stid="+stid, function (data2) {
+
+        for (i = 0; i < data2.length; i++){
+            bar_processed_grades.push([data2[i].name, parseInt(data2[i].y)]);
+            bar_processed_grades_name.push([data2[i].name]);
+            sum += parseInt(data2[i].y);
+        }
+        
+        Highcharts.chart('container2', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Grade Sums'
+            },
+            subtitle: {
+                text: 'Representation of assignment results'
+            },
+            xAxis: {
+                categories: bar_processed_grades_name
+            },
+            yAxis: {
+                title: {
+                    text: 'Grade Totals'
+                }
+
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y:.f}'
+                    }
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> Total grades.<br/>'
+            },
+
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: bar_processed_grades
+            }]
+        });
+      });
+    $.getJSON(url1+"?chart=series&stid="+stid, function (data3) {
+
+        for (i = 0; i < data3.length; i++){
+            series_processed_grades_dates.push([parseInt(data3[i].x), parseInt(data3[i].y)]);
+        }
+
+        Highcharts.stockChart('container3', {
+            rangeSelector: {
+                selected: 1
+            },
+
+            title: {
+                text: 'Marks Over Time'
+            },
+
+            series: [{
+                name: 'Marks',
+                data: series_processed_grades_dates,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }]
+        });
+      });
+
+    $('#logout1').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
     });
-});
+
+    $('#logout2').click(function(event) {
+      event.preventDefault();
+      localStorage.removeItem('questiondata');
+      localStorage.removeItem('answersdata');
+      sessionStorage.removeItem('studentdata');
+      window.location.href = "index.html";
+    });
+
+    
     </script>
 
   </body>

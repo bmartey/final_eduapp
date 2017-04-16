@@ -9,6 +9,7 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 $requestAssignments = $_REQUEST['assignmentsinfo'];
 $data = array();
 $qArray = array();
+$dataUpdated = array();
 
 $assignments = new assignments(); //object of assignments class
 $questions = new questions(); //object of questions class
@@ -16,8 +17,9 @@ $questions = new questions(); //object of questions class
 if(!empty($requestAssignments)){
 	$grade = $_REQUEST['class'];
 	$schid = $_REQUEST['schid'];
+	$stid = $_REQUEST['stid'];
 
-    $assignmentslist = $assignments->getassignmentlist($schid,$grade);    //query without search condition
+    $assignmentslist = $assignments->getassignmentlist($schid,$grade,$stid);    //query without search condition
 	while($row = $assignments->fetch()){
 		$data = array('tname' => $row['tname'],'description' => $row['description'],'aid' => $row['aid'], 'questionnos' => unserialize($row['questionnos']));
 		$dataUpdated[] = $data;

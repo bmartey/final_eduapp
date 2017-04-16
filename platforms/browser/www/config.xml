@@ -7,6 +7,9 @@
     <author email="brian.martey@ashesi.edu.gh" href="#">
         Brian Martey
     </author>
+    <icon height="72" src="eduapp.png" width="72" />
+    <icon height="48" src="eduapp.png" width="48" />
+    <icon height="36" src="eduapp.png" width="36" />
     <content src="index.html" />
     <access origin="*" />
 </widget>

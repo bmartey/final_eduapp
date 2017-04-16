@@ -1,0 +1,124 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Past Work</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome-1.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto").src = parsedinfo.photo;
+  
+      function jsonsuccess(data){
+        if (data.level == 1) {
+          
+        }else if (data.level == 2) {
+          window.location.href = "studentpage.html";
+        }else if (data.level == 3){
+
+        }else if (data.level == 4){
+          
+        }
+      }
+
+    });
+    </script>
+
+  </head>
+  <body>
+    <div class="callout primary medium head">
+      <div class="columns small-12 medium-12 large-12">
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-left">
+            <ul class="menu">
+              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li><a href="#"><i class="icons fi-list-bullet"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-right">
+            <a><img class="circularimage" src="" alt="profile.jpg" id ="profilephoto"></a>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="panel secondary callout medium body">
+      <br>
+      <div class="row columns small-12 medium-12">
+        <ul class="accordion" data-accordion>
+          <li class="accordion-item" data-accordion-item>
+            <a href="#" class="accordion-title">Calculus Assignment 1</a>
+            <div class="accordion-content" data-tab-content>
+              <div class="columns small-2 medium-2 large-2">
+                <div class="row column text-left">
+                  <a href="#"><i class="smallicons fi-check"></i></a>
+                </div>
+              </div>
+                  I would start in the open , due to using the `is-active` state class
+              <div class="columns small-2 medium-2 large-2">
+                <div class="row column text-right">
+                  <a href="#">85%</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="accordion-item" data-accordion-item>
+            <a href="#" class="accordion-title">English Test 1</a>
+            <div class="accordion-content" data-tab-content>
+              <div class="columns small-2 medium-2 large-2">
+                <div class="row column text-left">
+                  <a href="#"><i class="smallicons fi-x"></i></a>
+                </div>
+              </div>
+                  I would start in the open , due to using the `is-active` state class
+              <div class="columns small-2 medium-2 large-2">
+                <div class="row column text-right">
+                  <a href="#">---</a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="text-center">
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentnews.html"><i class="secondicons fi-comments"></i></a>
+        <label>News</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentassignments.html"><i class="secondicons fi-clipboard-pencil"></i></a>
+        <label>Assignments</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3"> 
+        <a href="#"><i class="secondicons fi-list-bullet"></i></a>
+        <label>Past Work</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentreport.html"><i class="secondicons fi-graph-bar"></i></a>
+        <label>Progress</label>
+      </div>
+    </footer>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
+    <script src="js/student.js"></script>
+
+  </body>
+</html>

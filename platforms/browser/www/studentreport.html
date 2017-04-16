@@ -1,0 +1,523 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome-1.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+    <script src="js/vendor/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script> 
+
+  </head>
+  <body>
+    <div class="callout primary medium head">
+      <div class="columns small-12 medium-12 large-12">
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-left">
+            <ul class="menu">
+              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li><a href="#"><i class="icons fi-list-bullet"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-right">
+            <a><img class="circularimage" src="" alt="profile.jpg" id ="profilephoto"></a>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="panel secondary callout medium body">
+      <div id="dataform" action="" method="POST" enctype="multipart/form-data">
+        <ul class="tabs" data-tabs id="tabs">
+          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Donut</a></li>
+          <li class="tabs-title"><a href="#panel2">Bar</a></li>
+          <li class="tabs-title"><a href="#panel3">Time Data</a></li>
+          <li class="tabs-title"><a href="#panel4">Series</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="tabs">
+          <div class="tabs-panel is-active" id="panel1">
+            <div id="container1" style="min-width: 85%; height: 90%; max-width: 120%; margin: 0 auto "></div>
+          </div>
+          <div class="tabs-panel" id="panel2">
+            <div id="container2" style="min-width: 83%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
+          </div>
+          <div class="tabs-panel" id="panel3">
+            <div id="container3" style="min-width: 85%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
+          </div>
+          <div class="tabs-panel" id="panel4">
+            <div id="container4" style="min-width: 85%; height: 50%; max-width: 120%; margin: 0 auto; position: absolute; top: 40%;left: 50%;margin-right: -50%; transform: translate(-50%, -50%)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center">
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentnews.html"><i class="secondicons fi-comments"></i></a>
+        <label>News</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentassignments.html"><i class="secondicons fi-clipboard-pencil"></i></a>
+        <label>Assignments</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3"> 
+        <a href="studentpast.html"><i class="secondicons fi-list-bullet"></i></a>
+        <label>Past Work</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="#"><i class="secondicons fi-graph-bar"></i></a>
+        <label>Progress</label>
+      </div>
+    </footer>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/highstock.js"></script>
+    <script src="js/highcharts-3d.js"></script>
+    <script src="js/exporting.js"></script> 
+    <script type="text/javascript" src="charts/loader.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
+    <script src="js/student.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+    <style type="text/css">
+      .tabs-content{
+        height: 90%;
+      }
+      
+    </style>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto").src = parsedinfo.photo;
+
+    });
+    </script>
+
+    <script type="text/javascript" language="javascript" >
+
+      $.fn.dataTableExt.afnFiltering.push(
+        function( oSettings, aData, iDataIndex ) {
+          var iFini = document.getElementById('datestart').value;
+          var iFfin = document.getElementById('dateend').value;
+          var iStartDateCol = 4;
+          var iEndDateCol = 4;
+
+          iFini=iFini.substring(0,4) + iFini.substring(5,7)+ iFini.substring(8,10);
+          iFfin=iFfin.substring(0,4) + iFfin.substring(5,7)+ iFfin.substring(8,10);
+   
+          var datofini=aData[iStartDateCol].substring(0,4) + aData[iStartDateCol].substring(5,7)+ aData[iStartDateCol].substring(8,10);
+          var datoffin=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10);
+   
+          if ( iFini === "" && iFfin === "" )
+          {
+              return true;
+          }
+          else if ( iFini <= datofini && iFfin === "")
+          {
+              return true;
+          }
+          else if ( iFfin >= datoffin && iFini === "")
+          {
+              return true;
+          }
+          else if (iFini <= datofini && iFfin >= datoffin)
+          {
+              return true;
+          }
+          return false;
+        }
+      );
+
+        //$('#datestart').keyup( function() { dataTable.draw(); } );
+        $("#datestart").on("keyup search input paste cut", function() {dataTable.search(this.value).draw(); });  
+        //$('#dateend').keyup( function() { dataTable.draw(); } );
+        $("#dateend").on("keyup search input paste cut", function() {dataTable.search(this.value).draw(); });
+
+        $("div.toolbar").html('<div class="row medium-6"><div class="columns medium-3"><input type="text" class="span2" id="datestart" name="datestart" placeholder="Start Date"></div><div class="columns medium-3"><input type="text" class="span2" id="dateend" name="dateend" placeholder="End Date"></div></div>');
+
+  </script> 
+
+    <script type="text/javascript">
+
+    // Build the chart
+    Highcharts.chart('container1', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Contents of Highsoft\'s weekly fruit delivery'
+    },
+    subtitle: {
+        text: '3D donut in Highcharts'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Delivered amount',
+        data: [
+            ['Bananas', 8],
+            ['Kiwi', 3],
+            ['Mixed nuts', 1],
+            ['Oranges', 6],
+            ['Apples', 8],
+            ['Pears', 4],
+            ['Clementines', 4],
+            ['Reddish (bag)', 1],
+            ['Grapes (bunch)', 1]
+        ]
+    }]
+});
+    </script>
+
+    <script type="text/javascript">
+      // Create the chart
+Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Browser market shares. January, 2015 to May, 2015'
+    },
+    subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://netmarketshare.com">netmarketshare.com</a>.'
+    },
+    xAxis: {
+        type: 'category'
+    },
+    yAxis: {
+        title: {
+            text: 'Total percent market share'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Microsoft Internet Explorer',
+            y: 56.33,
+            drilldown: 'Microsoft Internet Explorer'
+        }, {
+            name: 'Chrome',
+            y: 24.03,
+            drilldown: 'Chrome'
+        }, {
+            name: 'Firefox',
+            y: 10.38,
+            drilldown: 'Firefox'
+        }, {
+            name: 'Safari',
+            y: 4.77,
+            drilldown: 'Safari'
+        }, {
+            name: 'Opera',
+            y: 0.91,
+            drilldown: 'Opera'
+        }, {
+            name: 'Proprietary or Undetectable',
+            y: 0.2,
+            drilldown: null
+        }]
+    }],
+    drilldown: {
+        series: [{
+            name: 'Microsoft Internet Explorer',
+            id: 'Microsoft Internet Explorer',
+            data: [
+                [
+                    'v11.0',
+                    24.13
+                ],
+                [
+                    'v8.0',
+                    17.2
+                ],
+                [
+                    'v9.0',
+                    8.11
+                ],
+                [
+                    'v10.0',
+                    5.33
+                ],
+                [
+                    'v6.0',
+                    1.06
+                ],
+                [
+                    'v7.0',
+                    0.5
+                ]
+            ]
+        }, {
+            name: 'Chrome',
+            id: 'Chrome',
+            data: [
+                [
+                    'v40.0',
+                    5
+                ],
+                [
+                    'v41.0',
+                    4.32
+                ],
+                [
+                    'v42.0',
+                    3.68
+                ],
+                [
+                    'v39.0',
+                    2.96
+                ],
+                [
+                    'v36.0',
+                    2.53
+                ],
+                [
+                    'v43.0',
+                    1.45
+                ],
+                [
+                    'v31.0',
+                    1.24
+                ],
+                [
+                    'v35.0',
+                    0.85
+                ],
+                [
+                    'v38.0',
+                    0.6
+                ],
+                [
+                    'v32.0',
+                    0.55
+                ],
+                [
+                    'v37.0',
+                    0.38
+                ],
+                [
+                    'v33.0',
+                    0.19
+                ],
+                [
+                    'v34.0',
+                    0.14
+                ],
+                [
+                    'v30.0',
+                    0.14
+                ]
+            ]
+        }, {
+            name: 'Firefox',
+            id: 'Firefox',
+            data: [
+                [
+                    'v35',
+                    2.76
+                ],
+                [
+                    'v36',
+                    2.32
+                ],
+                [
+                    'v37',
+                    2.31
+                ],
+                [
+                    'v34',
+                    1.27
+                ],
+                [
+                    'v38',
+                    1.02
+                ],
+                [
+                    'v31',
+                    0.33
+                ],
+                [
+                    'v33',
+                    0.22
+                ],
+                [
+                    'v32',
+                    0.15
+                ]
+            ]
+        }, {
+            name: 'Safari',
+            id: 'Safari',
+            data: [
+                [
+                    'v8.0',
+                    2.56
+                ],
+                [
+                    'v7.1',
+                    0.77
+                ],
+                [
+                    'v5.1',
+                    0.42
+                ],
+                [
+                    'v5.0',
+                    0.3
+                ],
+                [
+                    'v6.1',
+                    0.29
+                ],
+                [
+                    'v7.0',
+                    0.26
+                ],
+                [
+                    'v6.2',
+                    0.17
+                ]
+            ]
+        }, {
+            name: 'Opera',
+            id: 'Opera',
+            data: [
+                [
+                    'v12.x',
+                    0.34
+                ],
+                [
+                    'v28',
+                    0.24
+                ],
+                [
+                    'v27',
+                    0.17
+                ],
+                [
+                    'v29',
+                    0.16
+                ]
+            ]
+        }]
+    }
+});
+    </script>
+
+    <script type="text/javascript">
+    Highcharts.chart('container3', {
+
+    title: {
+        text: 'Solar Employment Growth by Sector, 2010-2016'
+    },
+
+    subtitle: {
+        text: 'Source: thesolarfoundation.com'
+    },
+
+    yAxis: {
+        title: {
+            text: 'Number of Employees'
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            pointStart: 2010
+        }
+    },
+
+    series: [{
+        name: 'Installation',
+        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+    }, {
+        name: 'Manufacturing',
+        data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+    }, {
+        name: 'Sales & Distribution',
+        data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+    }, {
+        name: 'Project Development',
+        data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+    }, {
+        name: 'Other',
+        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+    }]
+
+});
+    </script>
+
+    <script type="text/javascript">
+      $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+    // Create the chart
+    Highcharts.stockChart('container4', {
+
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'AAPL Stock Price'
+        },
+
+        series: [{
+            name: 'AAPL',
+            data: data,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }]
+    });
+});
+    </script>
+
+  </body>
+</html>

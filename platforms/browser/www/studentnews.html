@@ -1,0 +1,150 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome-1.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/scroller.foundation.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTable.style.css">
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.js"></script> 
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.foundation.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.scroller.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/responsive.foundation.min.js"></script>
+
+  </head>
+  <body>
+    <div class="callout primary medium head">
+      <div class="columns small-12 medium-12 large-12">
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-left">
+            <ul class="menu">
+              <li><a href="studentpage.html"><i class="icons fi-arrow-left"></i></a></li>
+              <li><a href="#"><i class="icons fi-comments"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns small-6 medium-6 large-6">
+          <div class="row column text-right">
+            <a><img class="circularimage" src="" alt="profile.jpg" id ="profilephoto"></a>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="panel secondary callout medium body">
+    <div class="row columns small-10 medium-10">
+      <div class="row">
+      <div class="row" style="width:100%;color:#42b2d7;">
+        <table id="messages"  cellpadding="0" cellspacing="0" border="0" class="display" width="100%">
+          <thead>
+              <tr>
+                  <th>Sender</th>
+                  <th>Topic</th>
+                  <th>Content</th>
+                  <th>Date Sent</th>
+              </tr>
+          </thead>
+          <tfoot>
+              <tr>
+                  <th>Sender</th>
+                  <th>Topic</th>
+                  <th>Content</th>
+                  <th>Date Sent</th>
+              </tr>
+          </tfoot>
+        </table>
+      </div>
+      </div>
+    </div>
+
+
+      </div>
+    </div>
+
+    <footer class="text-center">
+      <div class="columns small-3 medium-3 large-3">
+        <a href="#"><i class="secondicons fi-comments"></i></a>
+        <label>News</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentassignments.html"><i class="secondicons fi-clipboard-pencil"></i></a>
+        <label>Assignments</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3"> 
+        <a href="studentpast.html"><i class="secondicons fi-list-bullet"></i></a>
+        <label>Past Work</label>
+      </div>
+      <div class="columns small-3 medium-3 large-3">
+        <a href="studentreport.html"><i class="secondicons fi-graph-bar"></i></a>
+        <label>Progress</label>
+      </div>
+    </footer>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
+    <script src="js/student.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto").src = parsedinfo.photo;
+  
+    });
+    </script>
+
+    <script type="text/javascript" language="javascript" >
+      $(document).ready(function() {
+          var dataTable = $('#messages').DataTable( {
+            "scrollY":     "50%",
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": {
+              "loadingIndicator": true
+            },
+            "responsive": true,
+            //"paging": false,
+            "columnDefs":[
+                  {
+                    "width":"70%","targets": 2
+                  },
+                  {
+                    "targets": 3 ,"visible": false
+                  }
+              ],
+              "order":[[3,"desc"]],
+              "processing": true,
+              "serverSide": true,
+              "ajax":{
+                  url :"messagesdata.php", // json datasource
+                  type: "post",  // method  , by default get
+                  error: function(){  // error handling
+                      $(".messages-error").html("");
+                      $("#messages").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+                      $("#messages_processing").css("display","none");             
+                  }
+              }
+          } );
+      } );
+  </script>
+
+  </body>
+</html>

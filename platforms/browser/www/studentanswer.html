@@ -1,0 +1,147 @@
+<!--html doctype written by Brian Martey-->
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignments</title>
+    <link rel="shortcut icon" type="image/png" href="eduapp2.png"/>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="foundation/fonts/foundation-icons.css"> 
+    <link href="css/font-awesome-1.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/student.css">
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src='lib/moment.min.js'></script>
+    <script src="dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+    <div class="callout primary medium head">
+      <div class="columns medium-12">
+        <div class="columns medium-6">
+          <div class="row column text-left">
+            <ul class="menu">
+              <li><a href="studentassignments.html"><i id="back" class="icons fi-arrow-left"></i></a></li>
+              <li><a href="#"><i class="icons fi-clipboard-pencil"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="columns medium-6">
+          <div class="row column text-right">
+            <a><img id="profilephoto" class="circularimage" src="" alt="profile.jpg"></a>
+          </div>
+        </div>
+    </div>
+    </div>
+    <div class="panel secondary callout medium body">
+      <br>
+      <div id="" class="row columns small-12 medium-12 large-12">
+        <div class="columns small-12 medium-12 large-12">
+            <input id="title" type="text" name="title" placeholder="" disabled>
+            <input id="num" type="text" name="num" placeholder="" style="display: none">
+            <input id="description" type="text" name="description" placeholder="" style="display: none">
+        </div>
+        <div id="assignarea" class="row columns small-12 medium-12 large-12">
+
+        </div>
+        <div>
+        <input id="start" type="submit" class="button expanded" name="start" onclick="begin()" value="Start">
+        <input id="finish" type="submit" class="button expanded" name="finish" value="Finish" style="display: none">
+        </div>
+      </div>
+    </div>
+    <footer class="text-center">
+      <div class="columns medium-3">
+        <a href="#"><i class="secondicons fi-comments"></i></a>
+        <label>News</label>
+      </div>
+      <div class="columns medium-3">
+        <a href="#"><i class="secondicons fi-clipboard-pencil"></i></a>
+        <label>Assignments</label>
+      </div>
+      <div class="columns medium-3"> 
+        <a href="#"><i class="secondicons fi-list-bullet"></i></a>
+        <label>Past Assignments</label>
+      </div>
+      <div class="columns medium-3">
+        <a href="#"><i class="secondicons fi-graph-bar"></i></a>
+        <label>Progress</label>
+      </div>
+    </footer>
+
+    <script src="js/foundation.min.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/student.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var studentinfo = sessionStorage.getItem('studentdata');
+      var parsedinfo = JSON.parse(studentinfo);
+      document.getElementById("profilephoto").src = parsedinfo.photo;
+
+      var questions = localStorage.getItem("questiondata");
+      var parsedquestions = JSON.parse(questions);
+
+
+      $('#back').click(function(event) {
+        event.preventDefault();
+        localStorage.removeItem('questiondata');
+        window.location.href = "studentassignments.html";
+      }); 
+
+    });
+
+    var questions = localStorage.getItem("questiondata");
+    var parsedquestions = JSON.parse(questions);
+
+    $.ajax({
+        type: 'POST',
+        url: 'assignmentnumservice.php',
+        data: 'assignmentnum='+parsedquestions,
+        success: function(data)
+        {
+          var myassignment = JSON.parse(data);
+          var assigndivs = document.getElementById("assignarea");
+          div1 = document.createElement("div");
+          div1.setAttribute('class', 'row');
+          document.getElementById("title").value = myassignment.tname;
+          begin(myassignment.questionnos);
+          assigndivs.appendChild(div1);
+        }
+      });
+
+    function begin(array){
+      for (var i = 0; i < array.length; i++) {
+        $.ajax({
+          type: 'POST',
+          url: 'questionsgetservice.php',
+          data: 'number='+array[i],
+          success: function(data)
+          {
+            var myquestions = JSON.parse(data);
+            var question = myquestions.qcontent;
+            div2 = document.createElement("div");
+            div2.setAttribute('class', 'columns small-12 medium-12 large-12');
+            label = document.createElement("label");
+            label.appendChild(document.createTextNode(question));
+            textarea = document.createElement("textarea");
+            textarea.setAttribute('id', 'answer'+i);
+            textarea.setAttribute('type', 'text');
+            textarea.setAttribute('class', 'answers');
+            textarea.setAttribute('name', 'answer[]');
+            textarea.setAttribute('placeholder', 'Type Answer Here');
+            label.appendChild(textarea);
+            div2.appendChild(label);
+            div1.appendChild(div2);
+          }
+        });
+            
+      }
+       
+    }
+        
+    </script>
+    
+  </body>
+</html>

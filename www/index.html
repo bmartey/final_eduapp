@@ -49,15 +49,15 @@
       function jsonsuccess(data){
         if (data.level == 1) {
           sessionStorage.setItem('admindata', JSON.stringify(data));
-          window.location.href = "http://35.166.18.143/~brian.martey/applied_2017_spring/eduapp/adminpage.html";
+          window.location.href = "adminpage.html";
         }else if (data.level == 2) {
           sessionStorage.setItem('studentdata', JSON.stringify(data));
-          window.location.href = "http://35.166.18.143/~brian.martey/applied_2017_spring/eduapp/studentpage.html";
+          window.location.href = "studentpage.html";
         }else if (data.level == 3){
-          sessionStorage.setItem('http://35.166.18.143/~brian.martey/applied_2017_spring/eduapp/teacherdata', JSON.stringify(data));
+          sessionStorage.setItem('teacherdata', JSON.stringify(data));
           window.location.href = "teacherpage.html";
         }else if (data.level == 4){
-          sessionStorage.setItem('http://35.166.18.143/~brian.martey/applied_2017_spring/eduapp/parentdata', JSON.stringify(data));
+          sessionStorage.setItem('parentdata', JSON.stringify(data));
           window.location.href = "parentpage.html";
         }
       }

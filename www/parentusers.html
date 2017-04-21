@@ -154,11 +154,13 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       var id = parsedinfo.uid;
       var schid = parsedinfo.schoolid;
       var chi = parsedinfo.children;
 
-      jQuery.get('usersservice.php?cmd=11&id='+id+'&chi='+chi).done(function (lists) {
+      jQuery.get(csserver+'usersservice.php?cmd=11&id='+id+'&chi='+chi).done(function (lists) {
         var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
         var myusers = JSON.parse(lists);
         if (myusers.length < 1) {
@@ -188,7 +190,7 @@
       //class dropdown list
       $.ajax({
           type: 'POST',
-          url: 'classservice.php?cmd=1',
+          url: csserver+'classservice.php?cmd=1',
           success: function(data)
           {
             var myclass = JSON.parse(data);
@@ -211,6 +213,8 @@
     var parentinfo = sessionStorage.getItem('parentdata');
     var parsedinfo = JSON.parse(parentinfo);
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     var schid = parsedinfo.schoolid;
     var id = parsedinfo.uid;
 
@@ -220,7 +224,7 @@
       //student dropdown list
       $.ajax({
         type: 'POST',
-        url: 'usersservice.php?cmd=4&grade='+grade+'&schid='+schid,
+        url: csserver+'usersservice.php?cmd=4&grade='+grade+'&schid='+schid,
         success: function(data)
         {
           var myclass = JSON.parse(data);
@@ -268,7 +272,7 @@
             $.ajax(
               {
                 type: "POST",
-                url: "usersservice.php",
+                url: csserver+"usersservice.php",
                 data: "cmd=10&id="+id+"&chi="+chi,
                 success: function(data){
                   swal({
@@ -299,7 +303,7 @@
           $.ajax(
             {
               type: "POST",
-              url: "usersservice.php",
+              url: csserver+"usersservice.php",
               data: "cmd=14&id="+id+"&chi="+chi,
               success: function(data){
                 swal({

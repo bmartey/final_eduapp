@@ -224,10 +224,12 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       //single class dropdown list
       $.ajax({
         type: 'POST',
-        url: 'classservice.php?cmd=1',
+        url: csserver+'classservice.php?cmd=1',
         success: function(data)
         {
           var myclass = JSON.parse(data);
@@ -248,7 +250,7 @@
       //multiple class dropdown list
       $.ajax({
         type: 'POST',
-        url: 'classservice.php?cmd=1',
+        url: csserver+'classservice.php?cmd=1',
         success: function(data)
         {
           var myclass = JSON.parse(data);
@@ -265,7 +267,7 @@
       //school dropdown list
       $.ajax({
           type: 'POST',
-          url: 'schoolservice.php?cmd=1',
+          url: csserver+'schoolservice.php?cmd=1',
           success: function(data)
           {
             var myschool = JSON.parse(data);
@@ -284,6 +286,8 @@
         });
 
     });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
 
     //defining the function on the add button click
     document.getElementById("adduser").onclick = function() {
@@ -340,7 +344,7 @@
 		    }else{
 				$.ajax({
 			        type: 'POST',
-			        url: 'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
+			        url: csserver+'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
 			        success: function(data)
 			          {
 			            swal({
@@ -364,7 +368,7 @@
 	        }else{
 			    $.ajax({
 			        type: 'POST',
-			        url: 'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
+			        url: csserver+'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
 			        success: function(data)
 			          {
 			            swal({
@@ -388,7 +392,7 @@
 	        }else{
 		    	$.ajax({
 			        type: 'POST',
-			        url: 'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
+			        url: csserver+'usersservice.php?cmd=2&fname='+fname+'&lname='+lname+'&sch='+sch+'&clss='+clss+'&lvl='+usr,
 			        success: function(data)
 			          {
 			            swal({
@@ -410,7 +414,7 @@
 		    }else{
 		    	$.ajax({
 			        type: 'POST',
-			        url: 'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
+			        url: csserver+'usersservice.php?cmd=1&fname='+fname+'&lname='+lname+'&sch='+sch+'&lvl='+usr,
 			        success: function(data)
 			          {
 			            swal({
@@ -489,20 +493,23 @@
     </script>
 
     <script type="text/javascript" language="javascript" >
+
       $(document).ready(function() {
-          var dataTable = $('#adminlist').DataTable( {
-	          "responsive": true,
-	          "order":[[0,"desc"]],
-	          "processing": true,
-	          "serverSide": true,
-	          "ajax":{
-	              url :"usersdataadmin.php", // json datasource
-	              type: "post",  // method  , by default get
-	              error: function(){  // error handling
-	                  $(".users-error").html("");
-	                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
-	                  $("#users_processing").css("display","none");             
-	              }
+        var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+        var dataTable = $('#adminlist').DataTable( {
+          "responsive": true,
+          "order":[[0,"desc"]],
+          "processing": true,
+          "serverSide": true,
+          "ajax":{
+              url :csserver+"usersdataadmin.php", // json datasource
+              type: "post",  // method  , by default get
+              error: function(){  // error handling
+                  $(".users-error").html("");
+                  $("#users").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
+                  $("#users_processing").css("display","none");             
+              }
 	          }
 	      });
 
@@ -512,7 +519,7 @@
 	          "processing": true,
 	          "serverSide": true,
 	          "ajax":{
-	              url :"usersdatateachers.php", // json datasource
+	              url :csserver+"usersdatateachers.php", // json datasource
 	              type: "post",  // method  , by default get
 	              error: function(){  // error handling
 	                  $(".users-error").html("");
@@ -528,7 +535,7 @@
 	          "processing": true,
 	          "serverSide": true,
 	          "ajax":{
-	              url :"usersdatastudents.php", // json datasource
+	              url :csserver+"usersdatastudents.php", // json datasource
 	              type: "post",  // method  , by default get
 	              error: function(){  // error handling
 	                  $(".users-error").html("");
@@ -544,7 +551,7 @@
 	          "processing": true,
 	          "serverSide": true,
 	          "ajax":{
-	              url :"usersdataparents.php", // json datasource
+	              url :csserver+"usersdataparents.php", // json datasource
 	              type: "post",  // method  , by default get
 	              error: function(){  // error handling
 	                  $(".users-error").html("");

@@ -125,10 +125,12 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       var id = parsedinfo.uid;
       var schid = parsedinfo.schoolid;
 
-      jQuery.get('classservice.php?cmd=7&id='+id+'&schid='+schid).done(function (lists) {
+      jQuery.get(csserver+'classservice.php?cmd=7&id='+id+'&schid='+schid).done(function (lists) {
         var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
         var myclasses = JSON.parse(lists);
         if (myclasses.length < 1) {
@@ -163,6 +165,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     function swap(num,id){
       $('#hidebutton'+num).show();
       $('#showbutton'+num).hide();
@@ -186,7 +190,7 @@
     function createassign(num,id) {
       $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php?cmd=13&clssid='+id,
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
         success: function(data)
         { 
             var assignnames = JSON.parse(data);
@@ -220,7 +224,7 @@
     function showassign(num,id) {
       $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php?cmd=13&clssid='+id,
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
         success: function(data)
         { 
             var assignnames = JSON.parse(data);
@@ -239,7 +243,7 @@
     function hideassign(num,id) {
       $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php?cmd=13&clssid='+id,
+        url: csserver+'assignmentservice.php?cmd=13&clssid='+id,
         success: function(data)
         { 
             var assignnames = JSON.parse(data);

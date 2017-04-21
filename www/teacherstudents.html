@@ -138,13 +138,15 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       var id = parsedinfo.uid;
       var schid = parsedinfo.schoolid;
       var grade = parsedinfo.grade;
 
       //class list
 
-      jQuery.get('classservice.php?cmd=6&id='+id+'&schid='+schid).done(function (lists) {
+      jQuery.get(csserver+'classservice.php?cmd=6&id='+id+'&schid='+schid).done(function (lists) {
         var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
         var myclasses = JSON.parse(lists);
         if (myclasses.length < 1) {
@@ -178,6 +180,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     function swap(num,length,schid,grade){
     	$('#hidebutton'+num).show();
     	$('#showbutton'+num).hide();
@@ -193,7 +197,7 @@
     function showstudents(num,length,schid,grade) {
     	$.ajax({
 	        type: 'POST',
-	        url: 'teacherservice.php?cmd=3&schid='+schid+'&class='+grade,
+	        url: csserver+'teacherservice.php?cmd=3&schid='+schid+'&class='+grade,
 	        success: function(data)
 	        { 
           		var studentnames = JSON.parse(data);

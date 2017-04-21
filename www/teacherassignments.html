@@ -163,6 +163,8 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       document.getElementById("createid").addEventListener("click", function(event){
           event.preventDefault()
       });
@@ -181,7 +183,7 @@
       //class dropdown list
       $.ajax({
           type: 'POST',
-          url: 'classservice.php?cmd=1',
+          url: csserver+'classservice.php?cmd=1',
           success: function(data)
           {
             var myclass = JSON.parse(data);
@@ -202,7 +204,7 @@
       //topic dropdown list
       $.ajax({
           type: 'POST',
-          url: 'topicservice.php',
+          url: csserver+'topicservice.php',
           success: function(data)
           {
             var mytopic = JSON.parse(data);
@@ -284,7 +286,7 @@
             $.ajax(
               {
                 type: "POST",
-                url: "assignmentservice.php",
+                url: csserver+"assignmentservice.php",
                 data: "cmd=6&desc="+inputValue+"&noq="+noq+"&topic="+topic+"&class="+vclass+"&questions="+questions+"&tid="+tid+"&schid="+schid+"&atype="+atype,
                 success: function(data){
                   swal({
@@ -354,7 +356,7 @@
             $.ajax(
               {
                 type: "POST",
-                url: "assignmentservice.php",
+                url: csserver+"assignmentservice.php",
                 data: "cmd=5&desc="+inputValue+"&noq="+noq+"&topic="+topic+"&class="+vclass+"&questions="+questions+"&answers="+answers+"&tid="+tid+"&schid="+schid+"&atype="+atype,
                 success: function(data){
                   swal({
@@ -441,7 +443,7 @@
 
           $.ajax({
             type: 'POST',
-            url: 'questionsservice.php',
+            url: csserver+'questionsservice.php',
             data: 'criteria='+stopic,
             success: function(data)
             {

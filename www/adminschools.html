@@ -189,6 +189,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     //function to show error message if no name, class or school is selected.
     function errorSch() {
       swal({
@@ -214,7 +216,7 @@
     	}else{
     		$.ajax({
 		        type: 'POST',
-		        url: 'schoolservice.php?cmd=3&schname='+sch,
+		        url: csserver+'schoolservice.php?cmd=3&schname='+sch,
 		        success: function(data)
 		          {
 		            swal({
@@ -239,7 +241,7 @@
     		var clssinfo = clss +" "+ clssno;
     		$.ajax({
 		        type: 'POST',
-		        url: 'classservice.php?cmd=3&clssname='+clssinfo,
+		        url: csserver+'classservice.php?cmd=3&clssname='+clssinfo,
 		        success: function(data)
 		          {
 		            swal({
@@ -283,13 +285,14 @@
 
     <script type="text/javascript" language="javascript" >
       $(document).ready(function() {
+        var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
           var dataTable = $('#schoollist').DataTable( {
 	          "responsive": true,
 	          "order":[[0,"asc"]],
 	          "processing": true,
 	          "serverSide": true,
 	          "ajax":{
-	              url :"schooldata.php", // json datasource
+	              url :csserver+"schooldata.php", // json datasource
 	              type: "post",  // method  , by default get
 	              error: function(){  // error handling
 	                  $(".school-error").html("");
@@ -305,7 +308,7 @@
 	          "processing": true,
 	          "serverSide": true,
 	          "ajax":{
-	              url :"classdata.php", // json datasource
+	              url :csserver+"classdata.php", // json datasource
 	              type: "post",  // method  , by default get
 	              error: function(){  // error handling
 	                  $(".class-error").html("");

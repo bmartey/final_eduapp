@@ -159,6 +159,7 @@
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
     });
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
 
     var studentinfo = sessionStorage.getItem('studentdata');
     var parsedinfo = JSON.parse(studentinfo);
@@ -166,7 +167,7 @@
     var name = parsedinfo.fname+" "+parsedinfo.lname;
 
     //pie chart
-    var url1 = 'gradesservice.php';
+    var url1 = csserver+'gradesservice.php';
     var pie_processed_grades = new Array();  
     var bar_processed_grades = new Array();
     var bar_processed_grades_name = new Array();

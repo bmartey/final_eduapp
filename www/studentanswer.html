@@ -148,6 +148,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     $('#logout1').click(function(event) {
       event.preventDefault();
       localStorage.removeItem('questiondata');
@@ -170,7 +172,7 @@
     //get assignment questions
       $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php',
+        url: csserver+'assignmentservice.php',
         data: 'cmd=3&assignmentnum='+parsedquestions,
         success: function(data)
         {
@@ -199,7 +201,7 @@
       document.getElementById("numofqs").value = JSON.parse(jsonarray).length;
         $.ajax({
           type: 'POST',
-          url: 'questionsgetservice.php',
+          url: csserver+'questionsgetservice.php',
           data: 'number='+jsonarray,
           success: function(data)
           {
@@ -274,7 +276,7 @@
           setTimeout(function(){
             $.ajax({
               type: 'POST',
-              url: 'answerservice.php',
+              url: csserver+'answerservice.php',
               data: 'cmd=2&solution='+jsonsolution+'&correctans='+jsoncorrectans+'&quid='+jsonquestionid+'&stid='+studentid+'&assid='+assid+'&tid='+tid+'&pid='+parents,
               success: function(data)
               {

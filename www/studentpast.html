@@ -142,7 +142,9 @@
       var vclass = parsedinfo.grade;
       var assinfo = "assinfo";
 
-      jQuery.get('assignmentservice.php?cmd=4&class='+vclass+"&schid="+schid+"&stid="+stid).done(function (lists) {
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      jQuery.get(csserver+'assignmentservice.php?cmd=4&class='+vclass+"&schid="+schid+"&stid="+stid).done(function (lists) {
 
           var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
           var questionarray= [];
@@ -166,24 +168,6 @@
       jQuery(document ).ajaxComplete( function($) {
         jQuery(this).foundation();
       });
-
-    /*$(document).ready(function() {
-      var dataTable = $('#history').DataTable( {
-        "responsive": true,
-          "order":[[3,"desc"]],
-          "processing": true,
-          "serverSide": true,
-          "ajax":{
-              url :"studentpast.php?class="+vclass+"&schid="+schid+"&stid="+stid, // json datasource
-              type: "post",  // method  , by default get
-              error: function(){  // error handling
-                  $(".history-error").html("");
-                  $("#history").append('<tbody class="sample-data-error"><tr><th colspan="5">No data found in the server</th></tr></tbody>');
-                  $("#history_processing").css("display","none");             
-              }
-          }
-      } );
-    } );*/
 
     });
 

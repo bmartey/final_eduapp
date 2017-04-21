@@ -37,7 +37,7 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
 
       function error() {
         swal({
@@ -71,7 +71,7 @@
 
         $.ajax({
           type: 'POST',
-          url: 'http://35.166.18.143/~brian.martey/applied_2017_spring/eduapp/login.php',
+          url: csserver+'login.php',
           data: theurl,
           success: function(data)
           {

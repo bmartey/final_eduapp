@@ -60,7 +60,7 @@
           title: 'Great', 
           text: 'Logging In', 
           type: 'success'
-        },function(){ 
+        }).then(function(){ 
           if (data.level == 1) {
             sessionStorage.setItem('admindata', JSON.stringify(data));
             window.location.href = "adminpage.html";

@@ -163,12 +163,14 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       var id = parsedinfo.uid;
       var schid = parsedinfo.schoolid;
 
       $.ajax({
         type: 'POST',
-        url: 'classservice.php?cmd=4&id='+id+'&schid='+schid,
+        url: csserver+'classservice.php?cmd=4&id='+id+'&schid='+schid,
         success: function(data)
           {
             var mystudents = JSON.parse(data);
@@ -192,7 +194,7 @@
 
       $.ajax({
         type: 'POST',
-        url: 'classservice.php?cmd=5&id='+id,
+        url: csserver+'classservice.php?cmd=5&id='+id,
         success: function(data)
           {
             var myclasses = JSON.parse(data);
@@ -216,7 +218,7 @@
 
       $.ajax({
         type: 'POST',
-        url: 'usersservice.php?cmd=7&id='+id,
+        url: csserver+'usersservice.php?cmd=7&id='+id,
         success: function(data)
           {
             var myclasses = JSON.parse(data);

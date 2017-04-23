@@ -148,6 +148,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     $('#logout1').click(function(event) {
       event.preventDefault();
       localStorage.removeItem('questiondata');
@@ -170,7 +172,7 @@
     //get assignment questions
       $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php',
+        url: csserver+'assignmentservice.php',
         data: 'cmd=3&assignmentnum='+parsedquestions,
         success: function(data)
         {
@@ -199,7 +201,7 @@
       document.getElementById("numofqs").value = JSON.parse(jsonarray).length;
         $.ajax({
           type: 'POST',
-          url: 'questionsgetservice.php',
+          url: csserver+'questionsgetservice.php',
           data: 'number='+jsonarray,
           success: function(data)
           {
@@ -256,25 +258,37 @@
       for (var i = 0; i < max; i++) {
         correctans.push(parsedans[i]);
         solution.push(document.getElementById("solution"+i).value);
-        questionid.push(document.getElementById("quid"+i).value);
-        jsoncorrectans = JSON.stringify(correctans);
-        jsonsolution = JSON.stringify(solution);
-        jsonquestionid = JSON.stringify(questionid);
+        questionid.push(document.getElementById("quid"+i).value);      
       }
 
-        $.ajax({
-          type: 'POST',
-          url: 'answerservice.php',
-          data: 'cmd=2&solution='+jsonsolution+'&correctans='+jsoncorrectans+'&quid='+jsonquestionid+'&stid='+studentid+'&assid='+assid+'&tid='+tid+'&pid='+parents,
-          success: function(data)
-          {
-            swal({
-              title: "Submitted!",
-              type: "success"
-            },function(){ 
-              window.location.href = "studentassignments.html";
+      jsoncorrectans = JSON.stringify(correctans);
+      jsonsolution = JSON.stringify(solution);
+      jsonquestionid = JSON.stringify(questionid);
+
+      swal({
+          title: "Submit?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax({
+              type: 'POST',
+              url: csserver+'answerservice.php',
+              data: 'cmd=2&solution='+jsonsolution+'&correctans='+jsoncorrectans+'&quid='+jsonquestionid+'&stid='+studentid+'&assid='+assid+'&tid='+tid+'&pid='+parents,
+              success: function(data)
+              {
+                swal({
+                  title: "Submitted!",
+                  type: "success"
+                },function(){ 
+                  window.location.href = "studentassignments.html";
+                });
+              }
             });
-          }
+          }, 2000)
         });
       
       localStorage.removeItem('answersdata');

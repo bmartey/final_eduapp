@@ -141,12 +141,14 @@
       document.getElementById("profilephoto1").src = parsedinfo.photo;
       document.getElementById("profilephoto2").src = parsedinfo.photo;
 
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
       var id = parsedinfo.uid;
       var schid = parsedinfo.schoolid;
 
       //class list
 
-      jQuery.get('classservice.php?cmd=6&id='+id+'&schid='+schid).done(function (lists) {
+      jQuery.get(csserver+'classservice.php?cmd=6&id='+id+'&schid='+schid).done(function (lists) {
         var postlist = '<ul class="accordion" data-accordion data-allow-all-closed="true">';
         var myclasses = JSON.parse(lists);
         if (myclasses.length < 1) {
@@ -181,7 +183,7 @@
 
     });
 
-    var url1 = 'gradesteacherservice.php';
+    var url1 = csserver+'gradesteacherservice.php';
     var pie_processed_grades = new Array();  
     var bar_processed_grades = new Array();
     var bar_processed_grades_name = new Array();

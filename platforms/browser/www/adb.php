@@ -19,6 +19,7 @@ class adb{
 		
 		//connect
 		$this->db=new mysqli(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
+		//$this->db=new mysqli("127.0.0.1","root","","final"); //for testing purposes
 		if($this->db->connect_errno){
 			//echo"no_connect";
 			//no connection, exit

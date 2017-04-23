@@ -146,6 +146,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     var parentinfo = sessionStorage.getItem('parentdata');
     var parsedinfo = JSON.parse(parentinfo);
     var children = parsedinfo.children;
@@ -158,7 +160,7 @@
     var name = parsedinfo.fname+" "+parsedinfo.lname;
 
     //pie chart
-    var url1 = 'gradesparentservice.php';
+    var url1 = csserver+'gradesparentservice.php';
     var pie_processed_grades = new Array();  
     var bar_processed_grades = new Array();
     var bar_processed_grades_name = new Array();
@@ -167,7 +169,7 @@
 
     $.ajax({
       type: 'POST',
-      url: 'usersservice.php?cmd=12&id='+jsnarray,
+      url: csserver+'usersservice.php?cmd=12&id='+jsnarray,
       success: function(data)
         {
           var info = JSON.parse(data);
@@ -220,7 +222,7 @@
 
     $.each(starray, function (i, id) {
 
-        $.getJSON('usersservice.php?cmd=13&id='+id,    function (namedata) {
+        $.getJSON(csserver+'usersservice.php?cmd=13&id='+id,    function (namedata) {
             names.push(namedata);
 
             $.getJSON(url1+'?chart=multiseries&stid='+id,    function (data) {

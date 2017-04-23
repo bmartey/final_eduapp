@@ -177,6 +177,7 @@
 
     <script type="text/javascript" language="javascript" >
       $(document).ready(function() {
+        var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
           var dataTable = $('#messages').DataTable( {
             "responsive": true,
             "columnDefs":[
@@ -188,7 +189,7 @@
               "processing": true,
               "serverSide": true,
               "ajax":{
-                  url :"messagesdata.php", // json datasource
+                  url : csserver+"messagesdata.php", // json datasource
                   type: "post",  // method  , by default get
                   error: function(){  // error handling
                       $(".messages-error").html("");

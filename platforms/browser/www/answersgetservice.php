@@ -19,11 +19,14 @@ if (!empty($requestNumber)) {
 
 	for ($i=0; $i < count($numbers); $i++) { 
 		$answerslist = $answers->getanswers($requestAssid, $requestStid, $numbers[$i]);  //query with search condition
-		$questionslist = $questions->getquestionstoanswer($numbers[$i]);
 
 		while($row1 = $answers->fetch()){
 			$data["solution"] = $row1["solution"];
 		}
+
+		$questionslist = $questions->getquestionstoanswer($numbers[$i]);
+
+		
 
 		while($row2 = $questions->fetch()){
 			$data['qcontent'] = $row2['qcontent'];

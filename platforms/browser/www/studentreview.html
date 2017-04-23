@@ -142,6 +142,8 @@
 
     });
 
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
     $('#logout1').click(function(event) {
       event.preventDefault();
       localStorage.removeItem('questiondata');
@@ -172,7 +174,7 @@
 
     $.ajax({
         type: 'POST',
-        url: 'assignmentservice.php',
+        url: csserver+'assignmentservice.php',
         data: 'cmd=3&assignmentnum='+parsedquestions,
         success: function(data)
         {
@@ -193,7 +195,7 @@
       jsonarray = JSON.stringify(numbers);
       document.getElementById("numofqs").value = JSON.parse(jsonarray).length;
 
-      jQuery.get('answersgetservice.php?number='+jsonarray+'&assid='+parsedquestions+'&stid='+stid).done(function (quests) {
+      jQuery.get(csserver+'answersgetservice.php?number='+jsonarray+'&assid='+parsedquestions+'&stid='+stid).done(function (quests) {
 
           var postquests = '<div class="columns small-12 medium-12 large-12">';
           var numbers ='';
@@ -255,7 +257,7 @@
           setTimeout(function(){
             $.ajax({
               type: 'POST',
-              url: 'answerservice.php',
+              url: csserver+'answerservice.php',
               data: 'cmd=3&solution='+jsonsolution+'&correctans='+jsoncorrectans+'&quid='+jsonquestionid+'&stid='+stid+'&assid='+assid+'&tid='+tid+'&pid='+parents,
               success: function(data)
               {

@@ -3,6 +3,13 @@ body {
   background-color: white;
   height: 100%;
 }
+@media(max-width:900px){
+  body{
+    font-size:20px;
+    background-color: white;
+    height: 100%;
+  }
+}
 
 h3{
   font-size:200%;
@@ -15,14 +22,14 @@ p{
   font-size:85%;
 }
 @media(max-width:900px){
-  p{font-size:75%;}
+  p{font-size:95%;}
 }
 
 span{
   font-size:85%;
 }
 @media(max-width:900px){
-  span{font-size:75%;}
+  span{font-size:95%;}
 }
 
 select{
@@ -61,15 +68,21 @@ figcaption{
   font-size:1.5rem;
 }
 @media(max-width:900px){
-  .icons{font-size:1.2rem;}
+  .icons{font-size:2.7rem;}
 }
 
 .smallicons{
  font-size:1rem;
 }
+@media(max-width:900px){
+  .smallicons{font-size:2.5rem;}
+}
 
 .secondicons{
  font-size:50px;
+}
+@media(max-width:900px){
+  .secondicons{font-size:2.5rem;}
 }
  
 .circularimage{
@@ -187,9 +200,8 @@ li{
 }
 
 #offCanvasLeft{
-  height:100%;
+  height:110%;
   background-color: gray;
-  /*width: 150px;*/
   margin: 0 0;
 }
 /*.is-open-left {

@@ -99,6 +99,7 @@ if (!empty($level)) {
 				}else{
 					$mark = 0;
 				}
+				echo $requestAssid." ".$solution[$i]." ".$correctans[$i]." ".$quid[$i]." ".$requestStid." ".$tid." ".$mark."<br>";
 
 				$marks[] = $mark;
 

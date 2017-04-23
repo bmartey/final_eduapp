@@ -35,9 +35,8 @@
                   <div class="columns small-6 medium-5 large-5"><input id="pword" type="password" name="pword" placeholder="Password" required></div>
                 </div>
                 <div class="row columns small-12 medium-12 large-12">
-                  <div class="columns medium-6 large-6"><input id="email" type="email" name="email" placeholder="Email Address" required></div>
-                  <div class="columns medium-3 large-3"><label for="photo" class="expanded button">Photo</label><input type="file" id="photo" class="show-for-sr"></div>
-                  <div class="columns medium-3 large-3">
+                  <div class="columns medium-7 large-7"><input id="email" type="email" name="email" placeholder="Email Address" required></div>
+                  <div class="columns medium-5 large-5">
                     <select id="user" name="user" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);" required>
                       <option value="">Select User Type</option>
                       <option value="1">Administrator</option>
@@ -155,7 +154,6 @@
         var lname = $("#lname").val();
         var username = fname+'.'+lname;
         var password = $("#pword").val();
-        //var photo = $("#photo").val();
         var phone = $("#phone").val();
         var email = $("#email").val();
         var usertype = $("#user").val();
@@ -167,7 +165,7 @@
           clss = $("#class").val();
         }
 
-        if ((fname =="") || (lname =="") || (password =="") || (photo =="") || (phone =="") || (email =="") || (usertype =="")) {
+        if ((fname =="") || (lname =="") || (password =="") || (phone =="") || (email =="") || (usertype =="")) {
           error();
         }else {
           var input = document.getElementById("photo"),
@@ -183,7 +181,6 @@
             formdata.append("lname", lname);
             formdata.append("username", username);
             formdata.append("password", password);
-            formdata.append("photo", photo);
             formdata.append("phone", phone);
             formdata.append("email", email);
             formdata.append("utype", usertype);

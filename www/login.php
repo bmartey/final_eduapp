@@ -4,11 +4,9 @@ header("Access-Control-Allow-Credentials: true");
 header('Access-Control-Allow-Origin: *'); 
 header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 /** written by Brian Martey*/
+include_once('users.php');
 
   if(isset($_POST['Login'])){
-
-    include_once('users.php');
-
     $user_default= new users();
 
     $username = $_POST['username'];
@@ -31,5 +29,53 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
       echo json_encode($json_data);
     }
     
+  }elseif(isset($_POST['Signup'])) {
+    $user_create = new users();
+    //$username = $_POST['username'];
+    $username = $_POST['fname'].".".$_POST['lname'];
+    $password = $_POST['password'];
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $usertype = $_POST['utype'];
+    $sch = $_POST['sch'];
+    $clss = $_POST['clss'];
+
+    /*if(isset($_FILES['photo'])){
+      $root = getcwd()."/";
+      $username = $_POST['username'];
+      $new_name = $username;
+
+      //File upload into the server location
+      $target_dir = "profileimages/";
+      $new_file_name = $target_dir.$new_name;
+      $target_file = $target_dir . basename($_FILES["photo"]["name"]);
+      $uploadOk = 1;
+      $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+      // Check if file already exists
+      if (file_exists($target_file)) {
+        echo "File already exists.";
+        $uploadOk = 0;
+      }
+      // Check if $uploadOk is set to 0 by an error
+      if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+      // if everything is ok, try to upload file
+      } else {
+        if (move_uploaded_file($_FILES["photo"]["tmp_name"], $root.$new_file_name)) {
+            echo "The file ". basename( $_FILES["photo"]["name"]). " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+      }
+    }else{
+      $target_file = "Error";
+    }*/
+
+    $result = $user_create->adduser($fname,$lname,$username,$password,$sch,$usertype,$clss,$phone,$email);
+    echo json_encode("success");
+
   }
 ?>

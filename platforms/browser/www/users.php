@@ -46,6 +46,12 @@ class users extends adb{
 		$result = $this->query($strQuery);
 	}
 
+	function adduser($fname, $lname, $username, $password, $school, $level, $class, $phone, $email){
+		$strQuery="insert into users set FNAME = '$fname', LNAME = '$lname', SCHOOLID = '$school', LEVEL = '$level', USERNAME = '$username',PASSWORD = MD5('$password'), grade = '$class', phone = '$phone', email = '$email' ";
+		$result = $this->query($strQuery);
+	}
+
+
 	function adminedituser(){
 		$strQuery="udpate users ";
 		

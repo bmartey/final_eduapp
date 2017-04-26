@@ -59,7 +59,8 @@
         swal({
           title: 'Great', 
           text: 'Logging In', 
-          type: 'success'
+          type: 'success',
+          allowOutsideClick: false
         }).then(function(){ 
           if (data.level == 1) {
             sessionStorage.setItem('admindata', JSON.stringify(data));

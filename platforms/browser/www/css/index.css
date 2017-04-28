@@ -59,6 +59,10 @@ body{
   width: 80%;
   position: relative;
 }
+.login .fields{
+  width: 100%;
+  position: relative;
+}
 .login .login-description {
   width: 40%;
   margin: 0 auto;

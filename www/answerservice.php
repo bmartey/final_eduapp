@@ -21,7 +21,7 @@ $user = new users();
 
 if (!empty($level)) {
 	switch ($level) {
-		case '1':
+		case '1': //not used
 			$requestSolution = $_REQUEST['solution'];
 			$requestCorrectAns = $_REQUEST['correctans'];
 			$requestQuid = $_REQUEST['quid'];
@@ -276,6 +276,55 @@ if (!empty($level)) {
 			echo $request;
 			echo $title;
 			echo $date;
+			break;
+
+		case '6': //teachers mark assignment
+			$requestQuid = $_REQUEST['quid'];
+			$requestStid = $_REQUEST['stid'];
+			$requestAssid = $_REQUEST['assid'];
+			$tid = $_REQUEST['tid'];
+			$marks = $_REQUEST['marks'];
+
+			$quid = json_decode($requestQuid);
+			$marklist = json_decode($marks);
+
+			for ($i=0; $i < count($marklist); $i++) { 
+				//echo $marklist[$i];
+				$marksarray[] = $marklist[$i];
+				$answers = $answer->updatemark($requestAssid,$quid[$i],$requestStid, $marklist[$i]);
+			}
+
+			for ($j=0; $j < count($marklist); $j++) { 
+				$totalmarks += $marksarray[$j];
+			}
+			//echo $totalmarks;
+
+			$percent = $totalmarks / count($marksarray);
+			$percentage = number_format( $percent * 100, 2 );
+
+			//echo $percentage;
+
+			if ($percentage >= 80) {
+				$lettergrade = "A";
+			}elseif ($percentage >= 70){
+				$lettergrade = "B";
+			}elseif ($percentage >= 65){
+				$lettergrade = "C";
+			}elseif ($percentage >= 60) {
+				$lettergrade = "D";
+			}elseif ($percentage >= 50){
+				$lettergrade = "E";
+			}elseif ($percentage < 50) {
+				$lettergrade = "F";
+			}else{
+				$lettergrade = "Null";
+			}
+
+			date_default_timezone_set("Europe/London");
+		    $datesubmitted = date("Y-m-d h:i:s");
+		    $date = date("Y-m-d");
+
+			$complete = $answer->completestatus($requestAssid,$requestStid,$totalmarks,$percentage, $lettergrade, $datesubmitted,$date, $tid);   
 			break;
 		
 		default:

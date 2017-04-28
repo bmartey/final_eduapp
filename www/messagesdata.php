@@ -6,16 +6,19 @@ header('Access-Control-Allow-Headers: X-Requested-With, Content-Type');
 /** messages service*/
 
 /* Database connection start */
-$servername = "35.166.18.143";
-$username = "brian.martey";
-$password = "73f10fb2216b97f4";
-$dbname = "db__brian_martey";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "final";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
 /* Database connection end */
 // storing  request (ie, get/post) global array to a variable  
 $requestData= $_REQUEST;
+
+/*$class = $_REQUEST['clss'];
+$sch = $_REQUEST['schid'];*/
 
 $columns = array( 
 // datatable column index  => database column name	
@@ -28,12 +31,18 @@ $columns = array(
 // getting total number records without any search
 $sql = "select mid,title,content,date_sent,sender";
 $sql.=" FROM messages";
+/*if ($class !="") {
+	$sql.=" where class='$class' and sch='$sch'";
+}*/
 $query=mysqli_query($conn, $sql) or die("messagesdata.php: get bookings");
 $totalData = mysqli_num_rows($query);
 $totalFiltered = $totalData;  // when there is no search parameter then total number rows = total number filtered rows.
 
 $sql = "select mid,title,content,date_sent,sender";
 $sql.=" FROM messages";
+/*if ($class !="") {
+	$sql.=" where class='$class' and sch='$sch'";
+}*/
 if( !empty($requestData['search']['value']) ) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
 	$sql.=" WHERE ( title LIKE '".$requestData['search']['value']."%' ";    
 	$sql.=" OR content LIKE '".$requestData['search']['value']."%' ";

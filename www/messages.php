@@ -44,8 +44,8 @@ class messages extends adb{
 	*returns a boolean true if successful, else, false
 	*/
 
-	function addmessage($title,$content,$date_sent,$sender){
-			$strQuery="insert into messages set title='$title',content='$content',date_sent ='$date_sent', sender='$sender'";
+	function addmessage($title,$content,$date_sent,$sender,$class,$sch){
+			$strQuery="insert into messages set title='$title',content='$content',date_sent ='$date_sent', sender='$sender', class='$class', sch='$sch'";
 			$result = $this->query($strQuery);
 	}
 			

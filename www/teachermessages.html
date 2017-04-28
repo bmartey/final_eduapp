@@ -93,6 +93,24 @@
         <div class="widebody">  
           <div class="innerwidebody">
             <div class="callout">
+              <fieldset class="fieldset">
+                <legend>Messages</legend>
+                <form>
+                  <div id="message" class="row columns small-12 medium-12 large-12">
+                    <div class="columns medium-3 large-3">
+                      <select id="class" name="class">
+                      </select>
+                    </div>
+                    <div class="columns medium-4 large-4">
+                      <input id="title" type="text" name="title" placeholder="title">
+                    </div>
+                    <div class="columns medium-12 large-12">
+                      <textarea id="content" name="content" placeholder="Message Content Here"></textarea>
+                    </div>
+                    <input id="sendmessage" type="submit" class="button expanded" name="sendmessage" onclick="sendNotice()" value="Send Message">
+                  </div>
+                </form> 
+              </fieldset>
             </div>
           </div>
           <div class="hide-for-small-only">
@@ -118,10 +136,97 @@
     $(document).ready(function() {
       var teacherinfo = sessionStorage.getItem('teacherdata');
       var parsedinfo = JSON.parse(teacherinfo);
-      document.getElementById("profilephoto1").src = parsedinfo.photo;
-      document.getElementById("profilephoto2").src = parsedinfo.photo;
+      if (parsedinfo.photo == "") {
+        document.getElementById("profilephoto1").src = "default.png";
+        document.getElementById("profilephoto2").src = "default.png";
+      }else{
+        document.getElementById("profilephoto1").src = parsedinfo.photo;
+        document.getElementById("profilephoto2").src = parsedinfo.photo;
+      }
+
+      var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+      document.getElementById("sendmessage").addEventListener("click", function(event){
+          event.preventDefault()
+      })
+
+      //class dropdown list
+      $.ajax({
+        type: 'POST',
+        url: csserver+'classservice.php?cmd=1',
+        success: function(data)
+        {
+          var myclass = JSON.parse(data);
+          var classselect = document.getElementById("class");
+          option = document.createElement("option");
+          option.setAttribute('value', "");
+          option.appendChild(document.createTextNode("Class"));
+          classselect.appendChild(option);
+          for(var i = 0; i <= myclass.length; i++) {
+              option = document.createElement("option");
+              option.setAttribute('value', myclass[i].cno);
+              option.appendChild(document.createTextNode(myclass[i].cname));
+              classselect.appendChild(option);
+          }
+        }
+      });
 
     });
+
+    var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
+
+    var teacherinfo = sessionStorage.getItem('teacherdata');
+    var parsedinfo = JSON.parse(teacherinfo);
+    var tid = parsedinfo.uid;
+    var schid = parsedinfo.schoolid;
+
+    //function to show error message if no class, topic or question number is selected.
+    function errorNotice() {
+      swal({
+        html: true,
+        title: 'Sorry', 
+        text: 'Choose a <b>Class</b>, <b>Title</b> and/or <b>Content</b>', 
+        type: 'error'}); 
+    }
+
+    //function to send old questions to be sent
+    function sendNotice() {
+      var topic = document.getElementById("title").value;
+      var vclass = document.getElementById("class").value;
+      var content = document.getElementById("content").value;
+
+      if((topic == "") || (vclass == "") || (content == "")){
+        errorNotice();
+      }else{
+        swal({
+          title: "Send Message?",
+          type: "info",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true,
+        },
+        function(){
+          setTimeout(function(){
+            $.ajax(
+              {
+                type: "POST",
+                url: csserver+"messageservice.php",
+                data: "cmd=1&title="+topic+"&content="+content+"&tid="+tid+"&clss="+vclass+"&schid="+schid,
+                success: function(data){
+                  swal({
+                    title: "Sent!",
+                    type: "success"
+                  },function(){ 
+                    location.reload();
+                  }
+                  );
+                }
+              });
+
+          }, 2000);
+        });
+      }
+    }
 
     $('#logout1').click(function(event) {
         event.preventDefault();

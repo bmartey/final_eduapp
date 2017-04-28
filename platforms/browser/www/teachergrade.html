@@ -122,8 +122,13 @@
     $(document).ready(function() {
       var teacherinfo = sessionStorage.getItem('teacherdata');
       var parsedinfo = JSON.parse(teacherinfo);
-      document.getElementById("profilephoto1").src = parsedinfo.photo;
-      document.getElementById("profilephoto2").src = parsedinfo.photo;
+      if (parsedinfo.photo == "") {
+        document.getElementById("profilephoto1").src = "default.png";
+        document.getElementById("profilephoto2").src = "default.png";
+      }else{
+        document.getElementById("profilephoto1").src = parsedinfo.photo;
+        document.getElementById("profilephoto2").src = parsedinfo.photo;
+      }
 
       var csserver = "http://cs.ashesi.edu.gh/~brian.martey/applied_2017_spring/eduapp/";
 
